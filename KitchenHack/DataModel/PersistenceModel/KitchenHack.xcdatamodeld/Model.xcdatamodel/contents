@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="purchases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Purchase" inverseName="ingredient" inverseEntity="Purchase"/>
+        <relationship name="suppliers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Supplier" inverseName="ingredients" inverseEntity="Supplier"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Purchase" representedClassName="Purchase" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isFave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="price" optional="YES" attributeType="String"/>
+        <attribute name="qty" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <relationship name="ingredient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="purchases" inverseEntity="Ingredient"/>
+        <relationship name="supplier" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Supplier" inverseName="purchases" inverseEntity="Supplier"/>
+    </entity>
+    <entity name="Supplier" representedClassName="Supplier" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="suppliers" inverseEntity="Ingredient"/>
+        <relationship name="purchases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Purchase" inverseName="supplier" inverseEntity="Purchase"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Ingredient" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Purchase" positionX="-36" positionY="9" width="128" height="134"/>
+        <element name="Supplier" positionX="-54" positionY="-9" width="128" height="104"/>
+    </elements>
+</model>
